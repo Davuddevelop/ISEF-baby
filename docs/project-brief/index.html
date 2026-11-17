@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>Self-Adapting Myoelectric Hand — Project Brief</title>
+<style>
+:root{--ink:#141b2b;--muted:#5b6579;--line:#dfe4ee;--bg:#f6f8fc;--accent:#ff6a2b;--blue:#2a7bff;--green:#16a36a;--navy:#1d2740}
+@page{size:A4;margin:0}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,"Helvetica Neue",Arial,sans-serif;color:var(--ink);font-size:10.4pt;line-height:1.5;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.page{width:210mm;height:297mm;padding:17mm 17mm 15mm;position:relative;overflow:hidden;page-break-after:always;background:#fff}
+.page:last-child{page-break-after:auto}
+.foot{position:absolute;bottom:8mm;left:17mm;right:17mm;display:flex;justify-content:space-between;font-size:8pt;color:var(--muted);border-top:1px solid var(--line);padding-top:2.5mm}
+.kicker{font-size:8.5pt;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin:0 0 2mm}
+h1{font-size:27pt;line-height:1.08;margin:0 0 4mm;letter-spacing:-.02em}
+h2{font-size:19pt;line-height:1.15;margin:0 0 5mm;letter-spacing:-.01em}
+h3{font-size:11.5pt;margin:5mm 0 2mm}
+p{margin:0 0 3mm}
+.muted{color:var(--muted)}
+.lead{font-size:12pt;color:#2c3548}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:5mm}
+.grid4{display:grid;grid-template-columns:1fr 1fr;gap:4mm}
+.card{background:var(--bg);border:1px solid var(--line);border-radius:3mm;padding:4mm 4.5mm}
+.card h4{margin:0 0 1.5mm;font-size:10.5pt}
+.card .n{font-size:8pt;font-weight:700;color:var(--accent);letter-spacing:.1em}
+.stat{font-size:22pt;font-weight:800;letter-spacing:-.02em;color:var(--navy);line-height:1.1}
+.tag{display:inline-block;font-size:7.5pt;font-weight:700;padding:.6mm 2mm;border-radius:10mm;background:#ffe9df;color:#b8431a;vertical-align:middle}
+.tag.blue{background:#e3eeff;color:#1d58c2}.tag.green{background:#ddf5ea;color:#11784e}.tag.gray{background:#eceff5;color:#4a5468}
+table{width:100%;border-collapse:collapse;font-size:9pt}
+th{text-align:left;font-size:7.8pt;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);border-bottom:1.5px solid var(--ink);padding:1.8mm 2mm}
+td{border-bottom:1px solid var(--line);padding:2mm;vertical-align:top}
+tr.us td{background:#fff3ec;font-weight:600}
+.note{border-left:3px solid var(--accent);background:#fff7f2;padding:3mm 4mm;border-radius:0 2mm 2mm 0;font-size:9.4pt;margin:3mm 0}
+.note.blue{border-color:var(--blue);background:#f1f6ff}
+.q{border:1.5px dashed #b9c3d6;border-radius:3mm;padding:3mm 4mm;margin:2mm 0;font-size:9.4pt}
+.q b{color:var(--accent)}
+img.full{width:100%;display:block}
+ul{margin:0 0 3mm;padding-left:5mm}li{margin:0 0 1.2mm}
+.cover{padding:0;background:linear-gradient(160deg,#0f1628 0%,#1d2740 55%,#2a3557 100%);color:#fff}
+.cover .inner{padding:22mm 18mm 0}
+.cover h1{font-size:38pt;color:#fff}
+.cover .lead{color:#c7d0e3;font-size:13pt;max-width:150mm}
+.cover img{position:absolute;left:-4mm;right:-4mm;bottom:38mm;width:calc(100% + 8mm)}
+.cover .meta{position:absolute;bottom:15mm;left:18mm;right:18mm;display:flex;gap:10mm;font-size:9pt;color:#aeb8cf;border-top:1px solid #3a4666;padding-top:4mm}
+.cover .meta b{display:block;color:#fff;font-size:10pt}
+.pill{display:inline-block;border:1px solid #4a5677;border-radius:10mm;padding:1mm 3.5mm;font-size:8.5pt;color:#c7d0e3;margin-right:2mm}
+svg text{font-family:Inter,Arial,sans-serif}
+.small{font-size:8.6pt}
+.src li{font-size:8.2pt;margin-bottom:1mm;word-break:break-word}
+</style></head><body>
+
+<!-- 1 COVER -->
+<section class="page cover">
+  <div class="inner">
+    <span class="pill">ISEF · Robotics &amp; Intelligent Machines</span><span class="pill">Sabahın alimləri XVI</span>
+    <h1 style="margin-top:9mm">A prosthetic hand<br>that keeps learning<br>its owner.</h1>
+    <p class="lead">A low-cost myoelectric hand whose control software adapts while it is used, so it stops failing when muscle signals change with sweat, fatigue or a shifted sensor.</p>
+  </div>
+  <img src="img/hero.png" alt="3D render of the hand and forearm socket">
+  <div class="meta">
+    <div><b>Project brief · v0.1</b>Base document, 17 Nov 2026</div>
+    <div><b>Software &amp; learning</b>EMG decoding, online adaptation (RL)</div>
+    <div><b>Mechatronics</b>Hand, actuators, EMG armband</div>
+    <div><b>Codename</b>Not chosen yet (your call)</div>
+  </div>
+</section>
+
+<!-- 2 ONE-PAGE SUMMARY -->
+<section class="page">
+  <p class="kicker">01 · The whole project on one page</p>
+  <h2>What we are building, and why it matters</h2>
+  <div class="grid4">
+    <div class="card"><div class="n">PROBLEM</div><h4>Good bionic hands are expensive, and their control drifts</h4>
+      <p class="small">Myoelectric hands cost roughly $15k–$100k+. Their decoders are trained once, then slowly fail as the skin signal changes. Control problems are a commonly cited reason people stop using them.</p></div>
+    <div class="card"><div class="n">GAP</div><h4>Adaptation exists, but only when the user asks for it</h4>
+      <p class="small">Commercial pattern-recognition systems retrain when the user presses a calibrate button or records new samples in an app. Continuous, label-free adaptation is still a research topic, tested on lab-grade hardware.</p></div>
+    <div class="card"><div class="n">PRODUCT</div><h4>Low-cost hand + 8-channel EMG band + an adapting decoder</h4>
+      <p class="small">A 3D-printed tendon-driven hand, a home-built EMG armband, and software that keeps improving the decoder from everyday use. The learning signal comes from task outcomes, not manual labels.</p></div>
+    <div class="card"><div class="n">PROOF</div><h4>Stays accurate for hours while a frozen decoder decays</h4>
+      <p class="small">We induce realistic drift (electrode shift, fatigue, sweat) and measure accuracy and task success over time. We compare a frozen decoder, manual recalibration, and our adaptive decoder.</p></div>
+  </div>
+
+  <h3>Explained like you're ten</h3>
+  <p>When you think "close my hand", your arm muscles make tiny electric sparks, even if the hand is missing. Stickers on the skin can hear those sparks, and a small computer guesses what you want and moves a robot hand.</p>
+  <p>The problem is that the sparks sound a little different every day: when you sweat, when you're tired, or when the sticker slides a bit. The computer starts guessing wrong, the hand gets annoying, and people stop wearing it.</p>
+  <p><b>Our hand keeps listening and learning</b>, so it gets better while you use it instead of worse.</p>
+
+  <div class="note"><b>The one-sentence engineering goal (draft, you must rewrite it):</b> Keep grip-intent accuracy at or above <i>X</i>% over a <i>T</i>-hour session with induced drift, without any manual recalibration, compared with a frozen decoder and a manually recalibrated one. Numbers <i>X</i> and <i>T</i> are yours to set after the Phase 0 experiments.</div>
+
+  <svg viewBox="0 0 600 150" width="100%" style="margin-top:2mm">
+    <defs><marker id="ar" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8z" fill="#141b2b"/></marker></defs>
+    <g font-size="11" text-anchor="middle">
+      <rect x="5" y="40" width="100" height="56" rx="10" fill="#f6f8fc" stroke="#dfe4ee"/><text x="55" y="64" font-weight="700">Intent</text><text x="55" y="80" fill="#5b6579">"close hand"</text>
+      <rect x="125" y="40" width="100" height="56" rx="10" fill="#f6f8fc" stroke="#dfe4ee"/><text x="175" y="64" font-weight="700">Muscles</text><text x="175" y="80" fill="#5b6579">tiny voltages</text>
+      <rect x="245" y="40" width="100" height="56" rx="10" fill="#fff3ec" stroke="#ff6a2b"/><text x="295" y="64" font-weight="700">EMG band</text><text x="295" y="80" fill="#5b6579">8 sensors</text>
+      <rect x="365" y="40" width="100" height="56" rx="10" fill="#e3eeff" stroke="#2a7bff"/><text x="415" y="64" font-weight="700">Decoder</text><text x="415" y="80" fill="#5b6579">+ adapter (RL)</text>
+      <rect x="485" y="40" width="100" height="56" rx="10" fill="#f6f8fc" stroke="#dfe4ee"/><text x="535" y="64" font-weight="700">Hand</text><text x="535" y="80" fill="#5b6579">motors move</text>
+      <g stroke="#141b2b" stroke-width="1.6" marker-end="url(#ar)"><line x1="105" y1="68" x2="123" y2="68"/><line x1="225" y1="68" x2="243" y2="68"/><line x1="345" y1="68" x2="363" y2="68"/><line x1="465" y1="68" x2="483" y2="68"/></g>
+      <path d="M535,98 C535,140 415,140 415,100" fill="none" stroke="#ff6a2b" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#ar)"/>
+      <text x="475" y="138" fill="#b8431a" font-weight="600">did it work? → learning signal</text>
+    </g>
+  </svg>
+  <div class="foot"><span>Self-Adapting Myoelectric Hand · Project Brief v0.1</span><span>2</span></div>
+</section>
+
+<!-- 3 PROBLEM -->
+<section class="page">
+  <p class="kicker">02 · The real-world problem</p>
+  <h2>A hand you can't control is a hand you stop wearing</h2>
+  <div class="grid2" style="grid-template-columns:1fr 1fr 1fr;gap:4mm">
+    <div class="card"><div class="stat">$15k–$100k+</div><p class="small muted">Typical price range for myoelectric hands, depending on source and features. Even a "low-cost" bionic hand sits at about $15k–$25k.</p></div>
+    <div class="card"><div class="stat">9% → 50%+</div><p class="small muted">Reported upper-limb prosthesis rejection rates vary widely by study. Control and comfort are the recurring reasons.</p></div>
+    <div class="card"><div class="stat">~500</div><p class="small muted">Azerbaijani war veterans who received ~600 imported high-tech prostheses since 2020 (government figures).</p></div>
+  </div>
+
+  <h3>Why control fails: the signal changes, but the decoder doesn't</h3>
+  <p>Surface EMG is unstable. The same intended movement produces a different signal pattern when:</p>
+  <div class="grid2" style="grid-template-columns:repeat(4,1fr);gap:3mm">
+    <div class="card small"><b>Electrode shift</b><br>the band rotates a few millimetres when put on again</div>
+    <div class="card small"><b>Sweat</b><br>skin impedance changes during the day</div>
+    <div class="card small"><b>Fatigue</b><br>tired muscles fire differently</div>
+    <div class="card small"><b>Arm position</b><br>raising the arm changes the muscle pattern</div>
+  </div>
+  <p style="margin-top:3mm">A decoder trained in the morning slowly gets worse. Today's fix is <b>recalibration</b>: the user stops, presses a button or opens an app, and records new examples. That is tedious, so users put it off, accuracy drops, frustration grows, and the hand goes in a drawer.</p>
+
+  <svg viewBox="0 0 600 220" width="100%">
+    <g font-size="10.5">
+      <line x1="60" y1="180" x2="580" y2="180" stroke="#141b2b"/><line x1="60" y1="20" x2="60" y2="180" stroke="#141b2b"/>
+      <text x="320" y="210" text-anchor="middle" fill="#5b6579">time wearing the hand (hours)</text>
+      <text x="18" y="100" transform="rotate(-90 18 100)" text-anchor="middle" fill="#5b6579">intent accuracy</text>
+      <path d="M60,40 C200,55 300,100 580,150" fill="none" stroke="#9aa4b8" stroke-width="3"/>
+      <text x="470" y="160" fill="#5b6579" font-weight="600">frozen decoder</text>
+      <path d="M60,40 L200,85 L205,42 L360,92 L365,44 L520,95 L525,46 L580,64" fill="none" stroke="#2a7bff" stroke-width="2.5" stroke-dasharray="6 4"/>
+      <text x="380" y="118" fill="#1d58c2" font-weight="600">manual recalibration (saw-tooth)</text>
+      <path d="M60,40 C180,52 260,50 580,48" fill="none" stroke="#ff6a2b" stroke-width="3.5"/>
+      <text x="420" y="36" fill="#b8431a" font-weight="700">our goal: adaptive decoder</text>
+      <text x="580" y="12" text-anchor="end" fill="#b8431a" font-size="9.5">ILLUSTRATIVE HYPOTHESIS, NOT DATA</text>
+    </g>
+  </svg>
+  <div class="note blue small">This chart is the <b>hypothesis we will test</b>, not a result. The whole project is about replacing this picture with real measurements.</div>
+  <div class="foot"><span>Sources: price and abandonment reviews, Ministry of Labour and Social Protection; see page 12</span><span>3</span></div>
+</section>
+
+<!-- 4 INTERFACE -->
+<section class="page">
+  <p class="kicker">03 · How a body talks to a machine</p>
+  <h2>There is no "one-to-one" wire. There is a decoder that guesses.</h2>
+  <p>Nobody connects a hand directly to the brain one-to-one, not even the best labs. Every real prosthetic <b>reads a signal and guesses intent</b>. The question is only <i>which</i> signal.</p>
+  <table>
+    <tr><th>Where we read</th><th>How</th><th>Signal quality</th><th>For us?</th></tr>
+    <tr><td><b>Brain implant</b></td><td>neurosurgery</td><td>very rich</td><td><span class="tag">No</span> unsafe and illegal for a student project</td></tr>
+    <tr><td><b>Nerve implant</b></td><td>surgery on the limb</td><td>rich</td><td><span class="tag">No</span></td></tr>
+    <tr class="us"><td><b>Surface EMG (muscles)</b></td><td>electrodes on the skin</td><td>good but drifts</td><td><span class="tag green">Yes</span> what commercial hands use</td></tr>
+    <tr><td><b>EEG (scalp)</b></td><td>cap on the head</td><td>noisy, slow, few commands</td><td><span class="tag gray">Possible</span> (NeuroFlex, ISEF 2025) but weaker</td></tr>
+  </table>
+
+  <h3>The full loop, step by step</h3>
+  <svg viewBox="0 0 600 250" width="100%">
+    <defs><marker id="a2" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8z" fill="#141b2b"/></marker></defs>
+    <g font-size="10" text-anchor="middle">
+      <g>
+        <rect x="10" y="20" width="105" height="60" rx="9" fill="#f6f8fc" stroke="#dfe4ee"/><text x="62" y="44" font-weight="700">1 · Electrodes</text><text x="62" y="60" fill="#5b6579">8 channels, skin</text>
+        <rect x="130" y="20" width="105" height="60" rx="9" fill="#f6f8fc" stroke="#dfe4ee"/><text x="182" y="44" font-weight="700">2 · Amplify + ADC</text><text x="182" y="60" fill="#5b6579">µV → numbers</text>
+        <rect x="250" y="20" width="105" height="60" rx="9" fill="#f6f8fc" stroke="#dfe4ee"/><text x="302" y="44" font-weight="700">3 · Filter</text><text x="302" y="60" fill="#5b6579">noise, mains hum</text>
+        <rect x="370" y="20" width="105" height="60" rx="9" fill="#f6f8fc" stroke="#dfe4ee"/><text x="422" y="44" font-weight="700">4 · Features</text><text x="422" y="60" fill="#5b6579">~200 ms windows</text>
+        <rect x="490" y="20" width="100" height="60" rx="9" fill="#e3eeff" stroke="#2a7bff"/><text x="540" y="44" font-weight="700">5 · Decoder</text><text x="540" y="60" fill="#5b6579">intent class</text>
+      </g>
+      <g stroke="#141b2b" stroke-width="1.5" marker-end="url(#a2)"><line x1="115" y1="50" x2="128" y2="50"/><line x1="235" y1="50" x2="248" y2="50"/><line x1="355" y1="50" x2="368" y2="50"/><line x1="475" y1="50" x2="488" y2="50"/><line x1="540" y1="80" x2="540" y2="118"/></g>
+      <rect x="490" y="120" width="100" height="60" rx="9" fill="#f6f8fc" stroke="#dfe4ee"/><text x="540" y="144" font-weight="700">6 · Motors</text><text x="540" y="160" fill="#5b6579">hand moves</text>
+      <line x1="490" y1="150" x2="357" y2="150" stroke="#141b2b" stroke-width="1.5" marker-end="url(#a2)"/>
+      <rect x="250" y="120" width="105" height="60" rx="9" fill="#f6f8fc" stroke="#dfe4ee"/><text x="302" y="144" font-weight="700">7 · User sees it</text><text x="302" y="160" fill="#5b6579">and corrects</text>
+      <rect x="130" y="190" width="225" height="50" rx="9" fill="#fff3ec" stroke="#ff6a2b"/><text x="242" y="211" font-weight="700" fill="#b8431a">8 · Adapter (our contribution)</text><text x="242" y="227" fill="#5b6579">outcome → small update to decoder</text>
+      <path d="M302,180 L302,188" stroke="#ff6a2b" stroke-width="2" marker-end="url(#a2)"/>
+      <path d="M355,215 C470,215 560,215 560,82" fill="none" stroke="#ff6a2b" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#a2)"/>
+    </g>
+  </svg>
+  <div class="note"><b>Two directions.</b> Our project covers <b>body → hand</b> (control). The reverse, <b>hand → body</b> (feeling touch), is a separate and harder problem. A cheap non-invasive version is a vibration motor on the skin that buzzes harder as grip force rises. Treat it as a stretch goal, not the core.</div>
+  <div class="foot"><span>Self-Adapting Myoelectric Hand · Project Brief v0.1</span><span>4</span></div>
+</section>
+
+<!-- 5 LANDSCAPE -->
+<section class="page">
+  <p class="kicker">04 · What already exists</p>
+  <h2>Products and research closest to our idea</h2>
+  <table>
+    <tr><th style="width:24%">Product / work</th><th>What it does</th><th style="width:17%">Adaptation</th><th style="width:15%">Cost</th></tr>
+    <tr><td><b>Ottobock Myo Plus</b><br><span class="muted small">commercial, FDA-cleared 2019</span></td><td>8-electrode pattern recognition; app shows patterns, user can add training recordings during daily life</td><td><span class="tag blue">User-triggered</span></td><td>premium (not public)</td></tr>
+    <tr><td><b>Coapt Gen2</b><br><span class="muted small">commercial</span></td><td>Pattern recognition controller; a physical button starts "quick recalibration"</td><td><span class="tag blue">User-triggered</span></td><td>via clinics (not public)</td></tr>
+    <tr><td><b>PSYONIC Ability Hand</b></td><td>Robust multi-grip bionic hand with touch feedback, marketed as cheaper than incumbents</td><td><span class="tag gray">Depends on controller</span></td><td>~$15k–$25k</td></tr>
+    <tr><td><b>Open Bionics Hero Arm</b></td><td>3D-printed, custom-fit myoelectric arm</td><td><span class="tag gray">Threshold / grip modes</span></td><td>quote-based, lower tier</td></tr>
+    <tr><td><b>bebionic / i-Limb</b></td><td>Premium multi-articulating hands</td><td><span class="tag gray">Depends on controller</span></td><td>premium (not verified)</td></tr>
+    <tr><td><b>Open-source printed hands</b><br><span class="muted small">e-NABLE, InMoov etc. (from memory)</span></td><td>Very cheap; mostly body-powered or simple 1–2 channel on/off EMG</td><td><span class="tag">None</span></td><td>tens to hundreds of $</td></tr>
+    <tr><td><b>Betthauser et al. 2024</b><br><span class="muted small">research</span></td><td>RL + sequential regression decodes 7 finger/wrist DoF; adapts while the user moves freely; 9 non-amputee subjects</td><td><span class="tag green">Continuous</span></td><td>lab hardware</td></tr>
+    <tr><td><b>Deng et al. (Bath)</b><br><span class="muted small">research</span></td><td>Unsupervised online adaptation of a latent representation under electrode shift</td><td><span class="tag green">Continuous</span></td><td>lab hardware</td></tr>
+    <tr><td><b>Visual-feedback co-adaptation, 2025</b></td><td>Shows the user their own pattern separability so the human adapts too</td><td><span class="tag green">Human + decoder</span></td><td>lab hardware</td></tr>
+    <tr class="us"><td><b>Our hand</b></td><td>Low-cost printed hand + DIY 8-ch band + continuous outcome-driven adaptation, tested on real hardware with induced drift</td><td><span class="tag green">Continuous, label-free</span></td><td>target: hundreds of $ (to verify)</td></tr>
+  </table>
+
+  <svg viewBox="0 0 600 230" width="100%" style="margin-top:4mm">
+    <g font-size="10.5">
+      <rect x="60" y="15" width="520" height="175" fill="#f6f8fc" stroke="#dfe4ee"/>
+      <line x1="320" y1="15" x2="320" y2="190" stroke="#dfe4ee" stroke-dasharray="4 4"/><line x1="60" y1="102" x2="580" y2="102" stroke="#dfe4ee" stroke-dasharray="4 4"/>
+      <text x="320" y="212" text-anchor="middle" fill="#5b6579">cost → (cheap → expensive)</text>
+      <text x="22" y="102" transform="rotate(-90 22 102)" text-anchor="middle" fill="#5b6579">adaptation ↑ (none → continuous)</text>
+      <circle cx="510" cy="125" r="9" fill="#2a7bff"/><text x="497" y="129" text-anchor="end">Myo Plus · Coapt</text>
+      <circle cx="430" cy="160" r="8" fill="#9aa4b8"/><text x="417" y="164" text-anchor="end">Ability Hand</text>
+      <circle cx="350" cy="165" r="8" fill="#9aa4b8"/><text x="350" y="185" text-anchor="middle">Hero Arm</text>
+      <circle cx="110" cy="172" r="8" fill="#9aa4b8"/><text x="124" y="176">open-source printed hands</text>
+      <circle cx="470" cy="45" r="9" fill="#16a36a"/><text x="457" y="49" text-anchor="end">research prototypes (lab hardware)</text>
+      <circle cx="130" cy="42" r="13" fill="#ff6a2b"/><text x="150" y="40" font-weight="700" fill="#b8431a">our target:</text><text x="150" y="55" fill="#b8431a">cheap + continuous</text>
+    </g>
+  </svg>
+  <div class="foot"><span>Positions are qualitative, from public product pages and papers; prices are rough, see sources</span><span>5</span></div>
+</section>
+
+<!-- 6 GAPS -->
+<section class="page">
+  <p class="kicker">05 · The gaps we can own</p>
+  <h2>Where the field is weak, and where we fit</h2>
+  <div class="grid4">
+    <div class="card"><div class="n">GAP 1</div><h4>Recalibration is manual</h4><p class="small">Commercial systems (Myo Plus, Coapt) adapt only when the user records new examples or presses a button. Nothing we found keeps adapting from normal use without labels.</p></div>
+    <div class="card"><div class="n">GAP 2</div><h4>Cheap hands have crude control</h4><p class="small">Low-cost and open-source hands mostly use 1–2 channel on/off thresholds. Pattern recognition and adaptation stay in the $15k+ tier.</p></div>
+    <div class="card"><div class="n">GAP 3</div><h4>Adaptive research lives on lab hardware and datasets</h4><p class="small">Continuous-adaptation papers use research-grade amplifiers or offline datasets. Whether it survives on cheap, noisy sensors is open.</p></div>
+    <div class="card"><div class="n">GAP 4</div><h4>Drift is rarely tested on purpose</h4><p class="small">Many evaluations are short sessions. A controlled drift protocol (shift, fatigue, sweat, arm position) on low-cost hardware is a clean experimental contribution.</p></div>
+  </div>
+
+  <h3>Our wedge, in one line</h3>
+  <p class="lead"><b>Continuous, label-free adaptation on hardware a clinic in a low-income country could afford, proven under controlled drift.</b></p>
+
+  <div class="note"><b>Honesty check before you claim novelty.</b> "Nothing we found" is not "nothing exists". Before the annotation deadline, each of you spends two evenings on Google Scholar and arXiv searching <i>"online adaptation myoelectric low-cost"</i>, <i>"unsupervised EMG decoder drift"</i> and <i>"reinforcement learning myoelectric"</i>. Write down the 5 closest papers and exactly how we differ. A judge who knows the field will ask.</div>
+
+  <h3>Why RL, and is it really RL?</h3>
+  <p>A judge will ask why not just retrain a classifier. Our answer: during real use <b>nobody tells the decoder the correct label</b>. It only sees <i>outcomes</i> (the grasp worked, or the user corrected it). Learning from outcomes instead of labels is the reinforcement-learning setting.</p>
+  <div class="q"><b>Decision for you:</b> each decision is one step (window → grip class → outcome). That is technically a <b>contextual bandit</b>, the one-step special case of RL. Is that enough, or does your design need multi-step credit assignment (e.g. a grasp sequence)? Decide and be ready to defend the term you use.</div>
+  <div class="foot"><span>Self-Adapting Myoelectric Hand · Project Brief v0.1</span><span>6</span></div>
+</section>
+
+<!-- 7 PRODUCT -->
+<section class="page">
+  <p class="kicker">06 · The product</p>
+  <h2>What it physically is</h2>
+  <img class="full" src="img/exploded.png" alt="Exploded view of the system" style="margin:-4mm 0 0">
+  <table style="margin-top:-6mm">
+    <tr><th>Module</th><th>Function</th><th>Owner</th><th>Design target (to confirm)</th></tr>
+    <tr><td><b>EMG band</b></td><td>8 surface electrodes + analog front end</td><td>Friend</td><td>stable contact, battery-only power, ≥1 kHz sampling per channel</td></tr>
+    <tr><td><b>Controller</b></td><td>reads EMG, runs decoder + adapter, drives motors</td><td>Both (interface)</td><td>end-to-end latency low enough to feel instant (literature often cites ~100–300 ms; verify)</td></tr>
+    <tr><td><b>Actuators</b></td><td>5 micro-gear motors with tendon spools</td><td>Friend</td><td>enough force to hold a filled cup; current sensing for grip force</td></tr>
+    <tr><td><b>Hand</b></td><td>3D-printed tendon-driven fingers, elastic return</td><td>Friend</td><td>light; 3+ grip types (power, pinch, point)</td></tr>
+    <tr><td><b>Socket / test mount</b></td><td>holds everything; for testing, a bench mount (no amputee)</td><td>Friend</td><td>armband worn by tester, hand mounted on stand</td></tr>
+    <tr><td><b>Software</b></td><td>filtering, features, decoder, adapter, logging, experiment scripts</td><td>You</td><td>every session logged and replayable</td></tr>
+  </table>
+  <div class="note blue small"><b>Important:</b> during testing nobody wears the hand as a prosthesis. A tester wears the EMG band on their own forearm and the hand sits on a stand next to them. This keeps the project safe and focused on the control problem.</div>
+  <div class="foot"><span>3D renders are concept visuals, not final CAD. Real CAD is your friend's job (Fusion 360 / Onshape)</span><span>7</span></div>
+</section>
+
+<!-- 8 FINGER -->
+<section class="page">
+  <p class="kicker">07 · Mechanism</p>
+  <h2>One finger, the building block</h2>
+  <img class="full" src="img/finger.png" alt="Finger mechanism render" style="margin:-6mm 0 -4mm">
+  <div class="grid2">
+    <div>
+      <h3>How it moves</h3>
+      <ul>
+        <li>A motor in the forearm winds a <b>tendon</b> (braided line) on a spool.</li>
+        <li>The tendon runs along the palm side through <b>metal guides</b>, so pulling it curls all three segments.</li>
+        <li>An <b>elastic band</b> on the back pulls the finger open when the motor relaxes.</li>
+        <li>This is <b>underactuated</b>: one motor, three joints. The finger wraps around objects of different shapes automatically.</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Questions for the mechatronics side</h3>
+      <div class="q small">How much tendon force is needed to hold a 500 g cup? Pick the motor from that, not the other way round.</div>
+      <div class="q small">How will you measure grip force? Motor current is cheap; a force sensor in the fingertip is better.</div>
+      <div class="q small">What breaks first after 1,000 grasps: the tendon, the pin holes or the elastic?</div>
+    </div>
+  </div>
+  <div class="note small">Before the full hand, build a <b>one-finger test rig</b> (finger + one motor + one EMG channel). It de-risks the mechanism, the motor driver and the software interface in week 2–3, instead of finding problems in week 8.</div>
+  <div class="foot"><span>Self-Adapting Myoelectric Hand · Project Brief v0.1</span><span>8</span></div>
+</section>
+
+<!-- 9 SOFTWARE -->
+<section class="page">
+  <p class="kicker">08 · The learning system</p>
+  <h2>Decoder + adapter: two layers of intelligence</h2>
+  <div class="grid2">
+    <div class="card"><div class="n">LAYER 1 · BASE DECODER</div><h4>Learned once, offline</h4><p class="small">A 5-minute calibration session: the user performs each grip on cue; we train a classifier on windowed EMG features. Start simple (LDA is the classic baseline), then try a small neural net. <b>This is also our "frozen decoder" baseline.</b></p></div>
+    <div class="card" style="background:#fff3ec;border-color:#ffc9b0"><div class="n">LAYER 2 · ADAPTER</div><h4>Learns continuously, online</h4><p class="small">During use, every decision gets an outcome. The adapter makes small, safe updates (e.g. only the last layer, or a feature-normalisation layer) so the decoder tracks the drift without forgetting.</p></div>
+  </div>
+
+  <h3>The RL formulation (draft, yours to own)</h3>
+  <table>
+    <tr><th style="width:22%">Piece</th><th>Our draft</th><th style="width:28%">Open question</th></tr>
+    <tr><td><b>State</b></td><td>features of the last EMG window (8 channels × a few features) + recent context</td><td>Which features survive cheap hardware best?</td></tr>
+    <tr><td><b>Action</b></td><td>chosen grip class (open / power / pinch / point / rest)</td><td>Discrete classes or continuous grip force?</td></tr>
+    <tr><td><b>Reward</b></td><td>see the three options below</td><td><b>The central research question</b></td></tr>
+    <tr><td><b>Update</b></td><td>small policy-gradient or bandit-style update, rate-limited, with rollback if accuracy collapses</td><td>How do we stop it learning the wrong thing?</td></tr>
+  </table>
+
+  <h3>Where does the reward come from? (your decision)</h3>
+  <div class="grid2" style="grid-template-columns:1fr 1fr 1fr;gap:3mm">
+    <div class="card small"><b>A · Explicit</b><br>User taps a button or makes a "no!" gesture when the hand is wrong.<br><span class="muted">+ clean signal · − annoying</span></div>
+    <div class="card small"><b>B · Task outcome</b><br>A game or task (move blocks) knows if the grasp succeeded.<br><span class="muted">+ objective · − only during tasks</span></div>
+    <div class="card small"><b>C · Implicit correction</b><br>If the user immediately switches intent, the last decision was probably wrong.<br><span class="muted">+ zero effort · − noisy, novel</span></div>
+  </div>
+  <div class="q"><b>Mentor note:</b> C is the most novel and the most risky. B is the safest for the competition. A strong plan might be: prove the method with B, then show C works partly. Argue it out between you two and write down your choice and why.</div>
+  <div class="foot"><span>Self-Adapting Myoelectric Hand · Project Brief v0.1</span><span>9</span></div>
+</section>
+
+<!-- 10 EXPERIMENTS -->
+<section class="page">
+  <p class="kicker">09 · How we prove it</p>
+  <h2>Experiment plan</h2>
+  <h3>Hypotheses</h3>
+  <ul>
+    <li><b>H1.</b> Under induced drift, the adaptive decoder keeps higher intent accuracy over a session than the frozen decoder.</li>
+    <li><b>H2.</b> The adaptive decoder reaches accuracy similar to manual recalibration, with zero recalibration time.</li>
+    <li><b>H3.</b> Higher accuracy translates into more successful grasps in a standard object-transfer task.</li>
+  </ul>
+  <h3>Three conditions, same person, same session plan</h3>
+  <table>
+    <tr><th>Condition</th><th>What happens</th></tr>
+    <tr><td>Frozen</td><td>train once at the start, never update</td></tr>
+    <tr><td>Manual recalibration</td><td>user recalibrates at fixed times (the commercial approach)</td></tr>
+    <tr class="us"><td>Adaptive (ours)</td><td>continuous updates from the reward signal, no manual step</td></tr>
+  </table>
+  <h3>Controlled drift protocol</h3>
+  <div class="grid2" style="grid-template-columns:repeat(4,1fr);gap:3mm">
+    <div class="card small"><b>Shift</b><br>remove and re-don the band, rotated ~1 cm</div>
+    <div class="card small"><b>Fatigue</b><br>a fixed grip-hold exercise between blocks</div>
+    <div class="card small"><b>Position</b><br>arm down / forward / up</div>
+    <div class="card small"><b>Time</b><br>repeat over a long session</div>
+  </div>
+  <h3>Metrics</h3>
+  <ul class="small">
+    <li><b>Intent accuracy</b> per block, on cued trials where the true intent is known.</li>
+    <li><b>Task success</b>: objects moved per minute in a box-and-blocks-style task (a standard clinical test).</li>
+    <li><b>Recalibration time saved</b>, in minutes per session.</li>
+    <li><b>Latency</b>: from muscle onset to motor start.</li>
+  </ul>
+  <div class="note"><b>Phase 0 needs no human testing.</b> Start with a public EMG dataset (NinaPro is the best known; verify licence and content). Simulate drift by shifting channels and scaling amplitudes, and show the adapter beats the frozen decoder <i>offline</i>. That gives you results to put in the annotation even before the hardware works.</div>
+  <div class="foot"><span>Statistical plan: repeated sessions per condition, report mean ± spread, test with a paired comparison</span><span>10</span></div>
+</section>
+
+<!-- 11 TEAM + TIMELINE -->
+<section class="page">
+  <p class="kicker">10 · Team and timeline</p>
+  <h2>Who does what, and the contract between you</h2>
+  <div class="grid2">
+    <div class="card"><div class="n">YOU · SOFTWARE &amp; LEARNING</div><ul class="small" style="margin-top:2mm"><li>Phase 0 offline experiments on public data</li><li>Signal pipeline: filtering, features, logging</li><li>Base decoder + adapter + reward logic</li><li>Experiment scripts and analysis</li></ul></div>
+    <div class="card"><div class="n">FRIEND · MECHATRONICS</div><ul class="small" style="margin-top:2mm"><li>EMG front end + 8-channel band</li><li>Finger rig → full hand, motors, drivers</li><li>Controller board, power, safety</li><li>CAD, printing, durability tests</li></ul></div>
+  </div>
+  <div class="note blue small"><b>The interface contract (write it in week 1):</b> the exact message the hardware sends to the software (channels, sample rate, units, timestamps) and the exact command the software sends back (grip class, force, rate). Team projects usually fail here, not inside either half. You must each be able to explain the other's half to a judge.</div>
+
+  <svg viewBox="0 0 600 250" width="100%" style="margin-top:2mm">
+    <g font-size="9.5">
+      <g fill="#5b6579">
+        <text x="150" y="14">Nov</text><text x="232" y="14">Dec</text><text x="345" y="14">Jan</text><text x="465" y="14">Feb</text><text x="555" y="14">Mar</text>
+      </g>
+      <line x1="140" y1="20" x2="590" y2="20" stroke="#dfe4ee"/>
+      <g>
+        <text x="0" y="40">Research plan + forms</text><rect x="140" y="30" width="45" height="14" rx="4" fill="#141b2b"/>
+        <text x="0" y="62">Phase 0: offline (dataset)</text><rect x="150" y="52" width="120" height="14" rx="4" fill="#2a7bff"/>
+        <text x="0" y="84">EMG band + finger rig</text><rect x="150" y="74" width="110" height="14" rx="4" fill="#ff6a2b"/>
+        <text x="0" y="106">Real-time pipeline</text><rect x="240" y="96" width="90" height="14" rx="4" fill="#2a7bff"/>
+        <text x="0" y="128">Full hand + integration</text><rect x="260" y="118" width="100" height="14" rx="4" fill="#ff6a2b"/>
+        <text x="0" y="150">Approval → pilot sessions</text><rect x="330" y="140" width="70" height="14" rx="4" fill="#16a36a"/>
+        <text x="0" y="172">Annotation submission</text><rect x="400" y="162" width="16" height="14" rx="4" fill="#141b2b"/>
+        <text x="0" y="194">Full experiments + analysis</text><rect x="410" y="184" width="110" height="14" rx="4" fill="#16a36a"/>
+        <text x="0" y="216">Poster + interview practice</text><rect x="490" y="206" width="70" height="14" rx="4" fill="#141b2b"/>
+        <text x="0" y="238">National final</text><rect x="560" y="228" width="16" height="14" rx="4" fill="#ff6a2b"/>
+      </g>
+      <line x1="408" y1="22" x2="408" y2="245" stroke="#ff6a2b" stroke-dasharray="3 3"/>
+      <text x="412" y="248" fill="#b8431a" font-size="8.5">~end Jan (unconfirmed)</text>
+    </g>
+  </svg>
+  <p class="small muted">Dates are planning estimates. The annotation deadline (about the end of January) and the final (early March) are inferred from last year's cycle; confirm both on the official site this week.</p>
+  <div class="foot"><span>Self-Adapting Myoelectric Hand · Project Brief v0.1</span><span>11</span></div>
+</section>
+
+<!-- 12 RISKS, QUESTIONS, SOURCES -->
+<section class="page">
+  <p class="kicker">11 · Risks, rules and open questions</p>
+  <h2>What could kill the project, and your homework</h2>
+  <table>
+    <tr><th style="width:30%">Risk</th><th>Mitigation</th></tr>
+    <tr><td><b>Human-participant rules</b></td><td>ISEF-style rules require approval before testing on any person, including yourselves. Read the national rules now, prepare the forms in week 1, and do Phase 0 on public data while you wait.</td></tr>
+    <tr><td><b>Electrical safety</b></td><td>Battery-only power for anything touching skin; never connected to mains or a wall-powered laptop during sessions. Use an isolated link (wireless or battery laptop).</td></tr>
+    <tr><td><b>DIY EMG too noisy</b></td><td>Test one channel in week 2. If quality is poor, use ready-made EMG sensor boards and spend the effort on the learning side.</td></tr>
+    <tr><td><b>Adapter learns the wrong thing</b></td><td>Rate-limit updates, keep a frozen copy, roll back if accuracy on cued trials drops.</td></tr>
+    <tr><td><b>Not novel enough</b></td><td>Do the literature check on page 6. Make the drift protocol and low-cost hardware the explicit contribution.</td></tr>
+    <tr><td><b>Timeline</b></td><td>Phase 0 results protect you: even if hardware slips, you have offline data for the annotation.</td></tr>
+  </table>
+  <h3>Your homework (answer before the next session)</h3>
+  <div class="q small"><b>1.</b> Rewrite the engineering goal on page 2 with real numbers you believe are reachable.</div>
+  <div class="q small"><b>2.</b> Choose the reward signal (A, B or C on page 9) and write three sentences defending it.</div>
+  <div class="q small"><b>3.</b> Friend: list the parts you already have, and estimate the cost of the rest. Fill the BOM yourselves.</div>
+  <div class="q small"><b>4.</b> Find the official deadlines and the human-participant rules for Sabahın alimləri XVI.</div>
+  <div class="q small"><b>5.</b> Pick a codename. It goes on the poster.</div>
+
+  <h3>Sources</h3>
+  <ul class="src">
+    <li>Betthauser et al., Online Adaptation for Myographic Control (arXiv 2412.17991)</li>
+    <li>Visual Feedback of Pattern Separability Improves Myoelectric Decoding (arXiv 2505.09819)</li>
+    <li>Deng et al., Online unsupervised adaptation of latent representation (University of Bath research portal)</li>
+    <li>Ottobock Myo Plus product and newsroom pages (ottobock.com, corporate.ottobock.com)</li>
+    <li>Coapt Gen2 handbook; FDA 510(k) K191083 summary</li>
+    <li>Ability Hand and Hero Arm pricing: disabilityhorizons.com, thepricer.org, scienceinsights.org (rough figures)</li>
+    <li>Abandonment: PMC6571339 (2019 cross-sectional study); Disability &amp; Rehabilitation 10.1080/09638288.2020.1866684; O&amp;P Edge review; Biddiss &amp; Chau 2007</li>
+    <li>Veteran prostheses: sosial.gov.az (476 servicemen / 572 prostheses; later ~500 / ~600)</li>
+    <li>NeuroFlex, Gordon E. Moore Award, Regeneron ISEF 2025 (societyforscience.org; NPR)</li>
+  </ul>
+  <div class="foot"><span>Self-Adapting Myoelectric Hand · Project Brief v0.1</span><span>12</span></div>
+</section>
+</body></html>

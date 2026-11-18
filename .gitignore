@@ -1,0 +1,12 @@
+# Python
+.venv/
+__pycache__/
+*.egg-info/
+.pytest_cache/
+
+# Datasets are never committed (size + licence). Put NinaPro files in data/.
+data/*
+!data/README.md
+
+# Generated outputs
+outputs/

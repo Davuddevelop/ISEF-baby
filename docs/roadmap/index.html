@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>Roadmap: what we build and in which order</title>
+<style>
+:root{--ink:#141b2b;--muted:#5b6579;--line:#dfe4ee;--bg:#f6f8fc;--accent:#ff6a2b;--blue:#2a7bff;--green:#16a36a;--navy:#1d2740;--gray:#9aa4b8}
+@page{size:A4;margin:0}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,"Helvetica Neue",Arial,sans-serif;color:var(--ink);font-size:10.4pt;line-height:1.5;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.page{width:210mm;height:297mm;padding:16mm 16mm 14mm;position:relative;overflow:hidden;page-break-after:always;background:#fff}
+.page:last-child{page-break-after:auto}
+.foot{position:absolute;bottom:7mm;left:16mm;right:16mm;display:flex;justify-content:space-between;font-size:8pt;color:var(--muted);border-top:1px solid var(--line);padding-top:2.5mm}
+.kicker{font-size:8.5pt;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin:0 0 2mm}
+h1{font-size:27pt;line-height:1.08;margin:0 0 4mm;letter-spacing:-.02em}
+h2{font-size:20pt;line-height:1.15;margin:0 0 3mm;letter-spacing:-.01em}
+h3{font-size:11.5pt;margin:4mm 0 2mm}
+p{margin:0 0 2.5mm}
+.sub{color:var(--muted);font-size:11pt;margin-bottom:4mm}
+.card{background:var(--bg);border:1px solid var(--line);border-radius:3mm;padding:3.5mm 4mm}
+.card h4{margin:0 0 1mm;font-size:10pt}
+.card p{font-size:8.8pt;margin:0;color:#3a4358}
+.grid{display:grid;gap:3.5mm}
+.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
+.tag{display:inline-block;font-size:7.5pt;font-weight:700;padding:.5mm 2mm;border-radius:10mm;vertical-align:middle}
+.t-or{background:#ffe9df;color:#b8431a}.t-bl{background:#e3eeff;color:#1d58c2}.t-gr{background:#ddf5ea;color:#11784e}.t-gy{background:#eceff5;color:#4a5468}
+.note{border-left:3px solid var(--accent);background:#fff7f2;padding:2.5mm 3.5mm;border-radius:0 2mm 2mm 0;font-size:9pt;margin:3mm 0}
+.note.bl{border-color:var(--blue);background:#f1f6ff}
+.note.gr{border-color:var(--green);background:#effaf5}
+svg{display:block;width:100%}
+svg text{font-family:Inter,Arial,sans-serif}
+.cover{padding:0;background:linear-gradient(160deg,#0f1628 0%,#1d2740 55%,#2a3557 100%);color:#fff}
+.cover .inner{padding:22mm 18mm 0}
+.cover h1{font-size:40pt;color:#fff;margin-top:8mm}
+.cover .lead{color:#c7d0e3;font-size:13pt;max-width:150mm}
+.cover img{position:absolute;left:-4mm;right:-4mm;bottom:30mm;width:calc(100% + 8mm)}
+.cover .meta{position:absolute;bottom:13mm;left:18mm;right:18mm;font-size:9pt;color:#aeb8cf;border-top:1px solid #3a4666;padding-top:4mm;display:flex;justify-content:space-between}
+.pill{display:inline-block;border:1px solid #4a5677;border-radius:10mm;padding:1mm 3.5mm;font-size:8.5pt;color:#c7d0e3;margin-right:2mm}
+.rule{display:flex;gap:3mm;align-items:flex-start;border:1px solid var(--line);border-radius:3mm;padding:3mm;background:#fff}
+.rule .ic{flex:0 0 9mm;height:9mm;border-radius:50%;background:#ffe9df;color:#b8431a;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:11pt}
+.rule b{display:block;font-size:9.5pt}.rule span{font-size:8.6pt;color:#3a4358}
+.ck{display:flex;gap:3mm;align-items:flex-start;padding:2.2mm 0;border-bottom:1px solid var(--line);font-size:9.6pt}
+.ck i{flex:0 0 5mm;height:5mm;border:1.6px solid var(--ink);border-radius:1.2mm;margin-top:.6mm}
+.gl{display:grid;grid-template-columns:repeat(2,1fr);gap:2.5mm 4mm}
+.gl div{border-bottom:1px solid var(--line);padding-bottom:1.8mm;font-size:9pt}.gl b{color:var(--navy)}
+</style></head><body>
+
+<!-- 1 COVER -->
+<section class="page cover">
+  <div class="inner">
+    <span class="pill">ISEF · Sabahın alimləri</span><span class="pill">Visual roadmap</span>
+    <h1>What we build,<br>and in which<br>order.</h1>
+    <p class="lead">A hand that keeps learning its owner. This is the map: the idea, the steps, the timeline, and where we are today.</p>
+  </div>
+  <img src="img/hero.png" alt="Concept render of the hand">
+  <div class="meta"><span>Roadmap · written 18 Nov 2026</span><span>Dates are planning guesses, not official deadlines</span></div>
+</section>
+
+<!-- 2 BIG IDEA -->
+<section class="page">
+  <p class="kicker">01 · The idea</p>
+  <h2>A hand that gets better the longer you use it</h2>
+  <p class="sub">The problem and our answer, in one picture.</p>
+
+  <svg viewBox="0 0 620 250">
+    <rect x="0" y="0" width="300" height="250" rx="12" fill="#f6f8fc" stroke="#dfe4ee"/>
+    <rect x="320" y="0" width="300" height="250" rx="12" fill="#fff7f2" stroke="#ffd2bd"/>
+    <text x="150" y="26" text-anchor="middle" font-size="12.5" font-weight="700">TODAY'S BIONIC HAND</text>
+    <text x="470" y="26" text-anchor="middle" font-size="12.5" font-weight="700" fill="#b8431a">OUR HAND</text>
+    <g stroke="#141b2b"><line x1="30" y1="200" x2="280" y2="200"/><line x1="30" y1="50" x2="30" y2="200"/></g>
+    <g stroke="#141b2b"><line x1="350" y1="200" x2="600" y2="200"/><line x1="350" y1="50" x2="350" y2="200"/></g>
+    <g font-size="9" fill="#5b6579" text-anchor="middle"><text x="155" y="222">hours of wearing it</text><text x="475" y="222">hours of wearing it</text></g>
+    <g font-size="9" fill="#5b6579"><text x="6" y="130" transform="rotate(-90 12 130)" text-anchor="middle">how often it guesses right</text><text x="326" y="130" transform="rotate(-90 332 130)" text-anchor="middle">how often it guesses right</text></g>
+    <path d="M30,62 C100,70 180,110 280,172" fill="none" stroke="#9aa4b8" stroke-width="3.5"/>
+    <text x="200" y="128" font-size="10" fill="#5b6579" font-weight="600">gets worse…</text>
+    <path d="M30,62 L120,100 L124,66 L205,110 L209,70 L280,112" fill="none" stroke="#2a7bff" stroke-width="2.5" stroke-dasharray="6 4"/>
+    <text x="56" y="160" font-size="9.5" fill="#1d58c2">…or you stop and recalibrate (annoying)</text>
+    <path d="M350,62 C430,70 520,66 600,70" fill="none" stroke="#ff6a2b" stroke-width="3.8"/>
+    <text x="475" y="52" text-anchor="middle" font-size="10" fill="#b8431a" font-weight="700">keeps learning by itself</text>
+    <text x="310" y="244" text-anchor="middle" font-size="8.5" fill="#b8431a">ILLUSTRATION OF OUR IDEA · REAL NUMBERS COME FROM THE EXPERIMENTS</text>
+  </svg>
+
+  <h3>The product has three parts</h3>
+  <svg viewBox="0 0 620 170">
+    <defs><marker id="m1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9z" fill="#141b2b"/></marker></defs>
+    <!-- band -->
+    <g>
+      <rect x="5" y="15" width="170" height="125" rx="14" fill="#fff3ec" stroke="#ff6a2b"/>
+      <ellipse cx="90" cy="68" rx="46" ry="22" fill="none" stroke="#323a4d" stroke-width="9"/>
+      <g fill="#ff6a2b"><circle cx="48" cy="68" r="5"/><circle cx="64" cy="83" r="5"/><circle cx="90" cy="90" r="5"/><circle cx="116" cy="83" r="5"/><circle cx="132" cy="68" r="5"/></g>
+      <text x="90" y="116" text-anchor="middle" font-size="13" font-weight="700">THE BAND</text>
+      <text x="90" y="131" text-anchor="middle" font-size="9.5" fill="#5b6579">reads muscle signals</text>
+    </g>
+    <line x1="178" y1="78" x2="222" y2="78" stroke="#141b2b" stroke-width="2" marker-end="url(#m1)"/>
+    <!-- brain -->
+    <g>
+      <rect x="225" y="15" width="170" height="125" rx="14" fill="#e3eeff" stroke="#2a7bff" stroke-width="2"/>
+      <g stroke="#2a7bff" stroke-width="2.2" fill="#fff"><circle cx="275" cy="52" r="9"/><circle cx="310" cy="38" r="9"/><circle cx="345" cy="52" r="9"/><circle cx="292" cy="78" r="9"/><circle cx="328" cy="78" r="9"/></g>
+      <g stroke="#2a7bff" stroke-width="1.6"><line x1="275" y1="52" x2="310" y2="38"/><line x1="310" y1="38" x2="345" y2="52"/><line x1="275" y1="52" x2="292" y2="78"/><line x1="345" y1="52" x2="328" y2="78"/><line x1="292" y1="78" x2="328" y2="78"/><line x1="310" y1="38" x2="292" y2="78"/><line x1="310" y1="38" x2="328" y2="78"/></g>
+      <text x="310" y="116" text-anchor="middle" font-size="13" font-weight="700">THE BRAIN</text>
+      <text x="310" y="131" text-anchor="middle" font-size="9.5" fill="#5b6579">guesses the grip, keeps learning</text>
+    </g>
+    <line x1="398" y1="78" x2="442" y2="78" stroke="#141b2b" stroke-width="2" marker-end="url(#m1)"/>
+    <!-- hand -->
+    <g>
+      <rect x="445" y="15" width="170" height="125" rx="14" fill="#f6f8fc" stroke="#dfe4ee"/>
+      <rect x="500" y="55" width="62" height="40" rx="9" fill="#eef1f6" stroke="#9aa4b8"/>
+      <g fill="#eef1f6" stroke="#9aa4b8"><rect x="502" y="30" width="9" height="28" rx="4.5"/><rect x="514" y="25" width="9" height="33" rx="4.5"/><rect x="526" y="23" width="9" height="35" rx="4.5"/><rect x="538" y="27" width="9" height="31" rx="4.5"/><rect x="550" y="38" width="9" height="22" rx="4.5" transform="rotate(25 554 60)"/></g>
+      <text x="530" y="116" text-anchor="middle" font-size="13" font-weight="700">THE HAND</text>
+      <text x="530" y="131" text-anchor="middle" font-size="9.5" fill="#5b6579">fingers and motors</text>
+    </g>
+    <g font-size="9.5" font-weight="700" text-anchor="middle">
+      <text x="90" y="162" fill="#b8431a">your friend builds it</text>
+      <text x="310" y="162" fill="#1d58c2">YOU build it (the core)</text>
+      <text x="530" y="162" fill="#b8431a">your friend builds it</text>
+    </g>
+  </svg>
+  <div class="note gr small"><b>Why the brain matters most:</b> the band and the hand are known engineering. The learning brain is what nobody else has built the way we want to. That is what we prove with numbers.</div>
+  <div class="foot"><span>Roadmap · the idea</span><span>2</span></div>
+</section>
+
+<!-- 3 STAIRCASE -->
+<section class="page">
+  <p class="kicker">02 · The versions</p>
+  <h2>Six steps. Each one must work before the next.</h2>
+  <p class="sub">Like a staircase: we never skip a step.</p>
+  <svg viewBox="0 0 640 310">
+    <g font-size="9.5">
+      <rect x="5"   y="215" width="100" height="85"  rx="6" fill="#e3eeff" stroke="#2a7bff"/>
+      <rect x="110" y="185" width="100" height="115" rx="6" fill="#e3eeff" stroke="#2a7bff"/>
+      <rect x="215" y="155" width="100" height="145" rx="6" fill="#fff3ec" stroke="#ff6a2b"/>
+      <rect x="320" y="125" width="100" height="175" rx="6" fill="#fff3ec" stroke="#ff6a2b"/>
+      <rect x="425" y="95"  width="100" height="205" rx="6" fill="#ddf5ea" stroke="#16a36a"/>
+      <rect x="530" y="65"  width="105" height="235" rx="6" fill="#141b2b"/>
+    </g>
+    <g font-size="15" font-weight="800" text-anchor="middle">
+      <text x="55" y="240" fill="#1d58c2">v0</text><text x="160" y="210" fill="#1d58c2">v0.5</text><text x="265" y="180" fill="#b8431a">v1</text><text x="370" y="150" fill="#b8431a">v2</text><text x="475" y="120" fill="#11784e">v3</text><text x="582" y="90" fill="#fff">FINAL</text>
+    </g>
+    <g font-size="9.5" text-anchor="middle" fill="#2c3548">
+      <text x="55" y="258">Brain on</text><text x="55" y="271">public data</text><text x="55" y="284" fill="#1d58c2" font-weight="700">no hardware</text>
+      <text x="160" y="228">Fake band,</text><text x="160" y="241">live brain</text>
+      <text x="265" y="198">Real band</text><text x="265" y="211">+ one finger</text>
+      <text x="370" y="168">Whole hand</text><text x="370" y="181">6 motors</text>
+      <text x="475" y="138">Tests with</text><text x="475" y="151">real people</text><text x="475" y="164" fill="#11784e" font-weight="700">permission first</text>
+      <text x="582" y="108" fill="#fff">Poster +</text><text x="582" y="121" fill="#fff">judges' Q&amp;A</text>
+    </g>
+    <g font-size="9" text-anchor="middle" fill="#5b6579">
+      <text x="55" y="22">YOU</text><text x="160" y="22">YOU</text><text x="265" y="22">BOTH</text><text x="370" y="22">FRIEND + YOU</text><text x="475" y="22">BOTH</text><text x="582" y="22">BOTH</text>
+    </g>
+    <path d="M55,205 L55,32" stroke="#dfe4ee" stroke-dasharray="3 3"/><path d="M160,175 L160,32" stroke="#dfe4ee" stroke-dasharray="3 3"/><path d="M265,145 L265,32" stroke="#dfe4ee" stroke-dasharray="3 3"/><path d="M370,115 L370,32" stroke="#dfe4ee" stroke-dasharray="3 3"/><path d="M475,85 L475,32" stroke="#dfe4ee" stroke-dasharray="3 3"/><path d="M582,55 L582,32" stroke="#dfe4ee" stroke-dasharray="3 3"/>
+  </svg>
+
+  <h3>What you can show at each step</h3>
+  <div class="grid g3">
+    <div class="card"><span class="tag t-bl">v0</span><h4 style="margin-top:1.5mm">One chart</h4><p>Our brain stays accurate over days; a normal one gets worse. Real recordings, no hardware.</p></div>
+    <div class="card"><span class="tag t-bl">v0.5</span><h4 style="margin-top:1.5mm">Brain running live</h4><p>A program pretends to be the band by replaying recordings.</p></div>
+    <div class="card"><span class="tag t-or">v1</span><h4 style="margin-top:1.5mm">One finger moves</h4><p>You tense your arm and one real finger curls.</p></div>
+    <div class="card"><span class="tag t-or">v2</span><h4 style="margin-top:1.5mm">Hand grips things</h4><p>5 fingers and a thumb that swings across the palm.</p></div>
+    <div class="card"><span class="tag t-gr">v3</span><h4 style="margin-top:1.5mm">Our own data</h4><p>Real people wear the band; the hand sits on a stand next to them.</p></div>
+    <div class="card" style="background:#141b2b;border-color:#141b2b"><span class="tag" style="background:#3a4666;color:#fff">FINAL</span><h4 style="margin-top:1.5mm;color:#fff">At the competition</h4><p style="color:#c7d0e3">Poster, demo, and practice answering judges.</p></div>
+  </div>
+  <div class="note gr"><b>The safety net:</b> if the hardware is late, <b>v0 still gives you real results</b> for the written application, because it uses real recordings from other scientists.</div>
+  <div class="foot"><span>Roadmap · versions</span><span>3</span></div>
+</section>
+
+<!-- 4 TIMELINE -->
+<section class="page">
+  <p class="kicker">03 · The timeline</p>
+  <h2>Who does what, and when</h2>
+  <p class="sub">From today (18 Nov) to early March.</p>
+  <svg viewBox="0 0 640 400">
+    <!-- chart area x from 140 to 630 ; 117 days ; 4.19 px/day -->
+    <g font-size="10" fill="#5b6579" text-anchor="start">
+      <text x="140" y="16">Nov</text><text x="199" y="16">Dec</text><text x="325" y="16">Jan</text><text x="455" y="16">Feb</text><text x="572" y="16">Mar</text>
+    </g>
+    <g stroke="#dfe4ee"><line x1="194" y1="22" x2="194" y2="385"/><line x1="324" y1="22" x2="324" y2="385"/><line x1="454" y1="22" x2="454" y2="385"/><line x1="572" y1="22" x2="572" y2="385"/></g>
+    <!-- lane titles -->
+    <rect x="0" y="30" width="636" height="22" fill="#e3eeff"/><text x="8" y="45" font-size="10.5" font-weight="700" fill="#1d58c2">YOU · software</text>
+    <rect x="0" y="130" width="636" height="22" fill="#fff3ec"/><text x="8" y="145" font-size="10.5" font-weight="700" fill="#b8431a">FRIEND · hardware</text>
+    <rect x="0" y="225" width="636" height="22" fill="#eef1f6"/><text x="8" y="240" font-size="10.5" font-weight="700" fill="#2c3548">BOTH</text>
+    <g font-size="9.5" fill="#141b2b">
+      <text x="8" y="72">Brain on public data (v0)</text><rect x="140" y="62" width="243" height="14" rx="5" fill="#2a7bff"/>
+      <text x="8" y="94">Fake band, live brain (v0.5)</text><rect x="253" y="84" width="150" height="14" rx="5" fill="#6aa3ff"/>
+      <text x="8" y="116">Full experiments + chart</text><rect x="425" y="106" width="130" height="14" rx="5" fill="#2a7bff"/>
+      <text x="8" y="172">Band + one finger (v1)</text><rect x="168" y="162" width="193" height="14" rx="5" fill="#ff6a2b"/>
+      <text x="8" y="194">Whole hand, 6 motors (v2)</text><rect x="324" y="184" width="189" height="14" rx="5" fill="#ff9a6a"/>
+      <text x="8" y="216">Test rig, durability checks</text><rect x="440" y="206" width="100" height="14" rx="5" fill="#ff6a2b"/>
+      <text x="8" y="268">Agreement: band ↔ software</text><rect x="140" y="258" width="72" height="14" rx="5" fill="#141b2b"/>
+      <text x="8" y="290">Human-testing permission</text><rect x="212" y="280" width="140" height="14" rx="5" fill="#16a36a"/>
+      <text x="8" y="312">Tests with real people (v3)</text><rect x="362" y="302" width="110" height="14" rx="5" fill="#16a36a"/>
+      <text x="8" y="334">Written application</text><rect x="283" y="324" width="40" height="14" rx="5" fill="#141b2b"/>
+      <text x="8" y="356">Poster + judges' practice</text><rect x="513" y="346" width="63" height="14" rx="5" fill="#141b2b"/>
+    </g>
+    <!-- markers -->
+    <line x1="140" y1="22" x2="140" y2="385" stroke="#ff6a2b" stroke-width="2"/><text x="144" y="396" font-size="9.5" fill="#b8431a" font-weight="700">TODAY · 18 Nov</text>
+    <line x1="451" y1="22" x2="451" y2="385" stroke="#b8431a" stroke-dasharray="4 3"/><text x="320" y="396" font-size="9.5" fill="#b8431a" font-weight="700">written application ~end Jan (?)</text>
+    <line x1="588" y1="22" x2="588" y2="385" stroke="#b8431a" stroke-dasharray="4 3"/><text x="520" y="396" font-size="9.5" fill="#b8431a" font-weight="700">final ~early Mar (?)</text>
+  </svg>
+  <div class="note"><b>Be careful with these dates.</b> The "(?)" markers are copied from last year's cycle, not from this year's rules. <b>Your job:</b> find the real deadlines and replace the guesses.</div>
+  <div class="note bl"><b>Why the first two bars matter:</b> the agreement between you and your friend (what the band sends, what the software sends back) is the one thing that can break the whole team. Do it first.</div>
+  <div class="foot"><span>Roadmap · timeline</span><span>4</span></div>
+</section>
+
+<!-- 5 WHERE WE ARE -->
+<section class="page">
+  <p class="kicker">04 · Where we are now</p>
+  <h2>Two steps done, one to go</h2>
+  <svg viewBox="0 0 640 120">
+    <line x1="40" y1="46" x2="600" y2="46" stroke="#dfe4ee" stroke-width="5"/>
+    <line x1="40" y1="46" x2="165" y2="46" stroke="#16a36a" stroke-width="5"/>
+    <g font-size="9.5" text-anchor="middle">
+      <circle cx="40" cy="46" r="15" fill="#16a36a"/><text x="40" y="51" fill="#fff" font-weight="800">✓</text><text x="40" y="76">M0</text><text x="40" y="89" fill="#5b6579">setup</text>
+      <circle cx="120" cy="46" r="15" fill="#16a36a"/><text x="120" y="51" fill="#fff" font-weight="800">✓</text><text x="120" y="76">M1</text><text x="120" y="89" fill="#5b6579">look at data</text>
+      <circle cx="200" cy="46" r="19" fill="#ff6a2b"/><text x="200" y="51" fill="#fff" font-weight="800">M2</text><text x="200" y="80" font-weight="700" fill="#b8431a">YOU ARE HERE</text><text x="200" y="93" fill="#5b6579">signal → numbers</text>
+      <circle cx="290" cy="46" r="14" fill="#fff" stroke="#9aa4b8" stroke-width="2"/><text x="290" y="50" fill="#5b6579" font-weight="700">M3</text><text x="290" y="76">frozen brain</text>
+      <circle cx="380" cy="46" r="14" fill="#fff" stroke="#9aa4b8" stroke-width="2"/><text x="380" y="50" fill="#5b6579" font-weight="700">M4</text><text x="380" y="76">recalibrated</text>
+      <circle cx="470" cy="46" r="14" fill="#fff" stroke="#9aa4b8" stroke-width="2"/><text x="470" y="50" fill="#5b6579" font-weight="700">M5</text><text x="470" y="76">adapting brain</text>
+      <circle cx="555" cy="46" r="14" fill="#fff" stroke="#9aa4b8" stroke-width="2"/><text x="555" y="50" fill="#5b6579" font-weight="700">M6</text><text x="555" y="76">final chart</text>
+      <circle cx="610" cy="46" r="10" fill="#fff" stroke="#9aa4b8" stroke-width="2" stroke-dasharray="3 2"/><text x="610" y="50" fill="#5b6579" font-size="8">M7</text><text x="606" y="76" font-size="8.5">agreement</text><text x="606" y="88" font-size="8.5" fill="#5b6579">(parallel)</text>
+    </g>
+  </svg>
+
+  <h3>What the first real look at the data showed</h3>
+  <p class="small" style="font-size:9pt;color:#5b6579">Subject 1, one movement, morning of day 1 vs afternoon of day 3. Values read by eye from your chart, so they are approximate.</p>
+  <svg viewBox="0 0 640 230">
+    <g stroke="#141b2b"><line x1="40" y1="190" x2="630" y2="190"/><line x1="40" y1="20" x2="40" y2="190"/></g>
+    <g font-size="9" fill="#5b6579">
+      <text x="34" y="194" text-anchor="end">0</text><text x="34" y="108" text-anchor="end">0.5</text><text x="34" y="24" text-anchor="end">1.0</text>
+    </g>
+    <!-- bars: x start 52, group width 41 ; scale 170px per 1.0 ; values d1/d3 -->
+    <g>
+      <g fill="#2a7bff">
+        <rect x="52" y="20" width="14" height="170"/><rect x="93" y="94.8" width="14" height="95.2"/><rect x="134" y="154.3" width="14" height="35.7"/><rect x="175" y="166.2" width="14" height="23.8"/><rect x="216" y="167.9" width="14" height="22.1"/><rect x="257" y="164.5" width="14" height="25.5"/><rect x="298" y="142.4" width="14" height="47.6"/><rect x="339" y="188.3" width="14" height="1.7"/><rect x="380" y="44" width="14" height="146"/><rect x="421" y="115.2" width="14" height="74.8"/><rect x="462" y="146" width="14" height="44"/><rect x="503" y="167.9" width="14" height="22.1"/><rect x="544" y="166.2" width="14" height="23.8"/><rect x="585" y="159.4" width="14" height="30.6"/>
+      </g>
+      <g fill="#ff6a2b">
+        <rect x="67" y="20" width="14" height="170"/><rect x="108" y="103.3" width="14" height="86.7"/><rect x="149" y="150.3" width="14" height="39.7"/><rect x="190" y="159.4" width="14" height="30.6"/><rect x="231" y="164.5" width="14" height="25.5"/><rect x="272" y="154.3" width="14" height="35.7"/><rect x="313" y="93.1" width="14" height="96.9"/><rect x="354" y="186.6" width="14" height="3.4"/><rect x="395" y="43.6" width="14" height="146.4"/><rect x="436" y="110" width="14" height="80"/><rect x="477" y="150.9" width="14" height="39.1"/><rect x="518" y="164.5" width="14" height="25.5"/><rect x="559" y="149.2" width="14" height="40.8"/><rect x="600" y="127" width="14" height="63"/>
+      </g>
+    </g>
+    <g font-size="8.5" text-anchor="middle" fill="#5b6579">
+      <text x="66" y="203">0</text><text x="107" y="203">1</text><text x="148" y="203">2</text><text x="189" y="203">3</text><text x="230" y="203">4</text><text x="271" y="203">5</text><text x="312" y="203" font-weight="800" fill="#b8431a">6</text><text x="353" y="203">7</text><text x="394" y="203">8</text><text x="435" y="203">9</text><text x="476" y="203">10</text><text x="517" y="203">11</text><text x="558" y="203">12</text><text x="599" y="203" font-weight="800" fill="#b8431a">13</text>
+    </g>
+    <text x="335" y="222" text-anchor="middle" font-size="9" fill="#5b6579">channel (sensor around the arm)</text>
+    <rect x="470" y="22" width="12" height="12" fill="#2a7bff"/><text x="487" y="32" font-size="9.5">day 1 morning</text>
+    <rect x="470" y="40" width="12" height="12" fill="#ff6a2b"/><text x="487" y="50" font-size="9.5">day 3 afternoon</text>
+    <path d="M320,88 L320,70" stroke="#b8431a" marker-end="url(#none)"/>
+    <text x="318" y="78" font-size="9" fill="#b8431a" font-weight="700" text-anchor="middle">about 2× louder</text>
+    <text x="598" y="116" font-size="9" fill="#b8431a" font-weight="700" text-anchor="middle">about 2×</text>
+  </svg>
+
+  <div class="grid g3">
+    <div class="card"><span class="tag t-gr">SEEN</span><h4 style="margin-top:1.5mm">The big channels stayed put</h4><p>Channels 0 and 8 are the same size on both days. The band did not slide around.</p></div>
+    <div class="card"><span class="tag t-or">SEEN</span><h4 style="margin-top:1.5mm">Some channels got louder</h4><p>Channels 6 and 13 roughly doubled. It looks like a strength change.</p></div>
+    <div class="card"><span class="tag t-gy">CAUTION</span><h4 style="margin-top:1.5mm">Only a first hint</h4><p>One person, one movement. The real test is whether a classifier gets worse (M3).</p></div>
+  </div>
+  <div class="note"><b>Also found:</b> one grasp is a single unbroken stretch of about 6.7 s, longer than the 4 s cue, because the dataset's authors adjusted the labels afterwards. This matters for how you label windows in M2.</div>
+  <div class="foot"><span>Roadmap · where we are</span><span>5</span></div>
+</section>
+
+<!-- 6 NEXT STEPS -->
+<section class="page">
+  <p class="kicker">05 · What comes next</p>
+  <h2>Steps M2 to M6, one picture each</h2>
+  <p class="sub">Each step produces something you can see on a screen.</p>
+
+  <div class="card" style="margin-bottom:3mm">
+    <span class="tag t-or">M2 · YOU ARE HERE</span><h4 style="margin-top:1.5mm;font-size:11pt">Turn a wiggly line into numbers a computer can learn from</h4>
+    <svg viewBox="0 0 620 130">
+      <defs><marker id="m2" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8z" fill="#141b2b"/></marker></defs>
+      <path d="M5,70 C15,55 20,85 30,70 S45,45 55,72 S70,95 80,60 S95,40 105,75 S120,100 130,55 S145,35 155,70 S170,90 180,65 S195,50 205,70 S220,85 230,62" fill="none" stroke="#2a7bff" stroke-width="1.6"/>
+      <g fill="none" stroke="#ff6a2b" stroke-width="2"><rect x="60" y="20" width="75" height="100" rx="5"/><rect x="90" y="26" width="75" height="88" rx="5" stroke-dasharray="4 3" opacity=".6"/></g>
+      <text x="97" y="14" text-anchor="middle" font-size="9" fill="#b8431a" font-weight="700">0.2 s window, moves 0.05 s</text>
+      <line x1="245" y1="70" x2="285" y2="70" stroke="#141b2b" stroke-width="2" marker-end="url(#m2)"/>
+      <g font-size="9.5">
+        <text x="300" y="40" font-weight="700">each window becomes a few numbers:</text>
+        <rect x="300" y="50" width="150" height="9" rx="3" fill="#dfe4ee"/><rect x="300" y="50" width="105" height="9" rx="3" fill="#2a7bff"/><text x="460" y="58">how strong</text>
+        <rect x="300" y="68" width="150" height="9" rx="3" fill="#dfe4ee"/><rect x="300" y="68" width="60" height="9" rx="3" fill="#2a7bff"/><text x="460" y="76">how jagged</text>
+        <rect x="300" y="86" width="150" height="9" rx="3" fill="#dfe4ee"/><rect x="300" y="86" width="120" height="9" rx="3" fill="#2a7bff"/><text x="460" y="94">how much it wiggles</text>
+        <text x="300" y="116" fill="#5b6579">illustration · you pick the real ones</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="grid g2">
+    <div class="card"><span class="tag t-gy">M3</span><h4 style="margin-top:1.5mm">Frozen brain: train once, never change</h4>
+      <svg viewBox="0 0 280 110"><g stroke="#141b2b"><line x1="20" y1="90" x2="270" y2="90"/><line x1="20" y1="10" x2="20" y2="90"/></g><path d="M20,22 C90,26 170,50 270,78" fill="none" stroke="#9aa4b8" stroke-width="3"/><text x="150" y="104" text-anchor="middle" font-size="8.5" fill="#5b6579">days</text><text x="200" y="48" font-size="9" fill="#5b6579" font-weight="700">expected to fall</text></svg>
+      <p>That drop is the problem we are solving.</p></div>
+    <div class="card"><span class="tag t-bl">M4</span><h4 style="margin-top:1.5mm">Recalibrated brain: retrain every session</h4>
+      <svg viewBox="0 0 280 110"><g stroke="#141b2b"><line x1="20" y1="90" x2="270" y2="90"/><line x1="20" y1="10" x2="20" y2="90"/></g><path d="M20,22 L75,50 L78,24 L135,52 L138,24 L200,54 L203,24 L270,48" fill="none" stroke="#2a7bff" stroke-width="2.5"/><text x="150" y="104" text-anchor="middle" font-size="8.5" fill="#5b6579">days</text><text x="150" y="78" font-size="9" fill="#1d58c2" font-weight="700" text-anchor="middle">what real products do</text></svg>
+      <p>Good, but the user must stop and retrain.</p></div>
+    <div class="card" style="background:#fff7f2;border-color:#ffc9b0"><span class="tag t-or">M5</span><h4 style="margin-top:1.5mm">Adapting brain: learns while you use it</h4>
+      <svg viewBox="0 0 280 110"><g stroke="#141b2b"><line x1="20" y1="90" x2="270" y2="90"/><line x1="20" y1="10" x2="20" y2="90"/></g><path d="M20,22 C90,26 170,24 270,26" fill="none" stroke="#ff6a2b" stroke-width="3.5"/><text x="150" y="104" text-anchor="middle" font-size="8.5" fill="#5b6579">days</text><text x="150" y="48" font-size="9" fill="#b8431a" font-weight="700" text-anchor="middle">our goal</text></svg>
+      <p>Step 1: re-balance channel strength. Step 2: learn from "right or wrong" feedback.</p></div>
+    <div class="card"><span class="tag t-gr">M6</span><h4 style="margin-top:1.5mm">The final chart: all three, all 10 people</h4>
+      <svg viewBox="0 0 280 110"><g stroke="#141b2b"><line x1="20" y1="90" x2="270" y2="90"/><line x1="20" y1="10" x2="20" y2="90"/></g><path d="M20,22 C90,26 170,50 270,78" fill="none" stroke="#9aa4b8" stroke-width="2.5"/><path d="M20,22 L75,48 L78,24 L135,50 L138,24 L200,52 L203,24 L270,46" fill="none" stroke="#2a7bff" stroke-width="2" stroke-dasharray="5 3"/><path d="M20,22 C90,26 170,24 270,26" fill="none" stroke="#ff6a2b" stroke-width="3"/><text x="150" y="104" text-anchor="middle" font-size="8.5" fill="#5b6579">days · with spread across people</text></svg>
+      <p>Goes into the written application.</p></div>
+  </div>
+  <div class="note bl"><b>Charts above are pictures of the hypothesis,</b> not results. The experiments decide whether the orange line really stays on top.</div>
+  <div class="foot"><span>Roadmap · next steps</span><span>6</span></div>
+</section>
+
+<!-- 7 HOW WE WORK -->
+<section class="page">
+  <p class="kicker">06 · How we work</p>
+  <h2>Roles, rules, and the decisions that are yours</h2>
+
+  <div class="grid g3" style="margin-bottom:3mm">
+    <div class="card" style="background:#e3eeff;border-color:#b9d1ff"><h4>YOU</h4><p>Write the core code: features, classifiers, the adapting part. Understand every line, because judges will ask.</p></div>
+    <div class="card" style="background:#fff3ec;border-color:#ffc9b0"><h4>YOUR FRIEND</h4><p>Builds the band, the hand and the motors. Decides the finger design.</p></div>
+    <div class="card"><h4>CLAUDE (mentor)</h4><p>Builds tools around your code, reviews your plans, and tries to find holes before a judge does.</p></div>
+  </div>
+
+  <h3>Five rules for honest results</h3>
+  <div class="grid g2">
+    <div class="rule"><div class="ic">1</div><div><b>Test on a different day</b><span>Never mix training and test data from the same moment.</span></div></div>
+    <div class="rule"><div class="ic">2</div><div><b>Look at every grip</b><span>"Rest" is about 25% of data, so average accuracy lies.</span></div></div>
+    <div class="rule"><div class="ic">3</div><div><b>Day 1 sets the settings</b><span>Later days are the exam. No peeking.</span></div></div>
+    <div class="rule"><div class="ic">4</div><div><b>Ten people, not one</b><span>One person is a story, ten is a result.</span></div></div>
+    <div class="rule" style="grid-column:span 2"><div class="ic">5</div><div><b>Made-up data never goes on the poster</b><span>Synthetic data only checks that the code runs.</span></div></div>
+  </div>
+
+  <h3>Decisions that belong to you</h3>
+  <div class="grid g3">
+    <div class="card"><span class="tag t-or">1</span><h4 style="margin-top:1.5mm">The reward</h4><p>How does the brain learn it was right? A button, the task result, or the person correcting itself?</p></div>
+    <div class="card"><span class="tag t-or">2</span><h4 style="margin-top:1.5mm">What to call it</h4><p>Probably a "contextual bandit", a simple form of reinforcement learning. Defend the name.</p></div>
+    <div class="card"><span class="tag t-or">3</span><h4 style="margin-top:1.5mm">The goal in numbers</h4><p>"Stay above X% for T hours with no recalibration."</p></div>
+    <div class="card"><span class="tag t-or">4</span><h4 style="margin-top:1.5mm">Finger design</h4><p>Friend's call: two strings or a linkage. Plan so far: 6 motors.</p></div>
+    <div class="card"><span class="tag t-or">5</span><h4 style="margin-top:1.5mm">Testing rules</h4><p>What permission is needed before anyone, even you two, is tested?</p></div>
+    <div class="card"><span class="tag t-or">6</span><h4 style="margin-top:1.5mm">Project name</h4><p>It goes on the poster.</p></div>
+  </div>
+  <div class="foot"><span>Roadmap · how we work</span><span>7</span></div>
+</section>
+
+<!-- 8 GLOSSARY + CHECKLIST -->
+<section class="page">
+  <p class="kicker">07 · Cheat sheet</p>
+  <h2>Words, and this week's checklist</h2>
+  <h3>Words explained</h3>
+  <div class="gl">
+    <div><b>EMG</b> · the tiny electric signal your muscles make</div>
+    <div><b>Decoder</b> · software that guesses the grip from the EMG</div>
+    <div><b>Drift</b> · the signal slowly changing over hours and days</div>
+    <div><b>Frozen</b> · trained once, never changed</div>
+    <div><b>Recalibration</b> · stopping to retrain the decoder</div>
+    <div><b>Adapter</b> · our part that keeps updating the decoder</div>
+    <div><b>Window</b> · a short piece of signal cut out for analysis</div>
+    <div><b>Feature</b> · a number describing a window, e.g. how strong</div>
+    <div><b>Baseline</b> · what we compare ourselves against</div>
+    <div><b>Reward</b> · the "right or wrong" message the brain learns from</div>
+    <div><b>Channel</b> · one sensor on the band</div>
+    <div><b>Synthetic</b> · made-up data, only for testing code</div>
+  </div>
+
+  <h3 style="margin-top:6mm">This week</h3>
+  <div>
+    <div class="ck"><i></i><span><b>Free disk space.</b> Aim for 5 GB or more free before downloading anything else.</span></div>
+    <div class="ck"><i></i><span><b>Write your M2 plan</b> in 3 to 4 sentences: window and step sizes in samples at 2000 Hz, and how you label a window that is half rest and half movement.</span></div>
+    <div class="ck"><i></i><span><b>Do the feature tests on paper</b> using the small array in <code>tests/test_features.py</code>.</span></div>
+    <div class="ck"><i></i><span><b>Find which ID is which grasp</b> in the Palermo et al. 2017 paper (the dataset page does not say).</span></div>
+    <div class="ck"><i></i><span><b>Ask your friend:</b> two strings or a linkage? What parts do you already have?</span></div>
+    <div class="ck"><i></i><span><b>Find the real deadlines</b> and the human-testing rules for the competition.</span></div>
+  </div>
+  <div class="note gr" style="margin-top:6mm"><b>Remember:</b> don't write any code in <code>features.py</code> until your plan has been reviewed. Send the plan first.</div>
+  <div class="foot"><span>Roadmap · cheat sheet</span><span>8</span></div>
+</section>
+</body></html>
